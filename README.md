@@ -16,7 +16,8 @@ Prerequisite ANDROID Emulator :
 
 
 
-1 - Create de SELENIUM Script with mobiles commands (Tap, Swipe, ...)
+1 - Create de SELENIUM Script with mobiles commands (Tap, Swipe, ...) 
+-- See example: SeleniumScript.html
 
 2 - Fill appsettings.json :
 <pre><code>
