@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudNetCare.MobilePlayer", "CloudNetCareMobilePlayer\CloudNetCare.MobilePlayer.csproj", "{86F19ACF-EBA7-4E76-A0EB-5E9278EC725D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudNetCare.AppiumPilot", "CloudNetCare.AppiumPilot\CloudNetCare.AppiumPilot.csproj", "{8F92D629-6A64-4D29-A7FB-1C705D62ED51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudNetCare.SeleniumWrapper", "CloudNetCare.SeleniumWrapper\CloudNetCare.SeleniumWrapper.csproj", "{C6A09FF3-18AF-4231-8491-D848475CBF80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{4FD6CE0F-DC0E-411D-B852-1F2FC19C5EAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "appium-dotnet-driver-netstandard2", "appium-dotnet-driver\appium-dotnet-driver-netstandard2.csproj", "{EF98A001-9916-4A4F-B13D-B1CC87C0BA80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudNetCare.MobilePlayer.Console", "CloudNetCare.MobilePlayer.Console\CloudNetCare.MobilePlayer.Console.csproj", "{79A29017-8FB5-46DE-9A62-9FB84EEB0670}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86F19ACF-EBA7-4E76-A0EB-5E9278EC725D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F19ACF-EBA7-4E76-A0EB-5E9278EC725D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F19ACF-EBA7-4E76-A0EB-5E9278EC725D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F19ACF-EBA7-4E76-A0EB-5E9278EC725D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F92D629-6A64-4D29-A7FB-1C705D62ED51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F92D629-6A64-4D29-A7FB-1C705D62ED51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F92D629-6A64-4D29-A7FB-1C705D62ED51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F92D629-6A64-4D29-A7FB-1C705D62ED51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6A09FF3-18AF-4231-8491-D848475CBF80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6A09FF3-18AF-4231-8491-D848475CBF80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6A09FF3-18AF-4231-8491-D848475CBF80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6A09FF3-18AF-4231-8491-D848475CBF80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF98A001-9916-4A4F-B13D-B1CC87C0BA80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF98A001-9916-4A4F-B13D-B1CC87C0BA80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF98A001-9916-4A4F-B13D-B1CC87C0BA80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF98A001-9916-4A4F-B13D-B1CC87C0BA80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A29017-8FB5-46DE-9A62-9FB84EEB0670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A29017-8FB5-46DE-9A62-9FB84EEB0670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A29017-8FB5-46DE-9A62-9FB84EEB0670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A29017-8FB5-46DE-9A62-9FB84EEB0670}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF98A001-9916-4A4F-B13D-B1CC87C0BA80} = {4FD6CE0F-DC0E-411D-B852-1F2FC19C5EAA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9F8A731-251C-4E87-8ED0-E60B6DD2776C}
+	EndGlobalSection
+EndGlobal
