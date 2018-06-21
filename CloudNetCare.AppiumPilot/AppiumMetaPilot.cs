@@ -85,7 +85,7 @@ namespace CloudNetCare.AppiumPilot
 
                         _installedPackageName = androidDriverBuilder.InstalledPackageName;
 
-                        //ugly, wait for derbier warmup
+                        AppiumDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
                         Thread.Sleep(10 * 1000);
                     }
                     catch (Exception e)
