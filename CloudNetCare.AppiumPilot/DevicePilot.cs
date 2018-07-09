@@ -179,6 +179,9 @@ namespace CloudNetCare.AppiumPilot
                         returnValue.resultValue = ResultValue.COMMAND_OK;
                         ret = returnValue;
                         break;
+                    case "pageSource":
+                        ret = _appiumMetaPilot.PageSource(out stepValue);
+                        break;
                     default:
                         ret = new CommandReturn();
                         ret.resultValue = ResultValue.INVALID_COMMAND;
