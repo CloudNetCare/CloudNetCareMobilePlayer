@@ -94,6 +94,30 @@ namespace CloudNetCare.AppiumPilot
                         return;
                     }
                 }
+                if (!deviceTarget.IsRealDevice && deviceTarget.Platform == DevicePlatform.IOs)
+                {
+                    try
+                    {
+                        var iosDriverBuilder = new IosDriverBuilder();
+
+                        AppiumDriver = iosDriverBuilder
+                                                .DeviceTarget(deviceTarget)
+                                                .AaptExePath(aaptExePath)
+                                                .AppiumUri(appiumServerUri)
+                                                .CommandTimeout(CommandTimeout)
+                                                .PackagePath(packagePath)
+                                                .Build();
+
+
+                        //ugly, wait for derbier warmup
+                        Thread.Sleep(10 * 1000);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error launching device : " + e.Message);
+                        return;
+                    }
+                }
                 else
                 {
                     AppiumDriver = null;
