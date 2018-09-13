@@ -110,6 +110,7 @@ namespace CloudNetCare.AppiumPilot
 
 
                         //ugly, wait for derbier warmup
+
                         Thread.Sleep(10 * 1000);
                     }
                     catch (Exception e)
