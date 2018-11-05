@@ -102,7 +102,6 @@ namespace CloudNetCare.AppiumPilot
 
                         AppiumDriver = iosDriverBuilder
                                                 .DeviceTarget(deviceTarget)
-                                                .AaptExePath(aaptExePath)
                                                 .AppiumUri(appiumServerUri)
                                                 .CommandTimeout(CommandTimeout)
                                                 .PackagePath(packagePath)
@@ -187,7 +186,7 @@ namespace CloudNetCare.AppiumPilot
             {
                 if (_deviceTarget.Platform == DevicePlatform.IOs)
                 {
-                    if (IsBrowser(_aaptExePath)) AppiumDriver.Close();
+                    if (IsBrowser(_packagePath)) AppiumDriver.Close();
                     else AppInteraction.CloseApp();
                     AppiumDriver.Dispose();
                     AppiumDriver.Quit();

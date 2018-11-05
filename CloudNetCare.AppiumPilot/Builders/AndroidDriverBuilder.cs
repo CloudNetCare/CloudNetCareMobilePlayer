@@ -134,17 +134,14 @@ namespace CloudNetCare.AppiumPilot.Builders
                 sr = p.StandardOutput;
                 err = p.StandardError;
                 sw.AutoFlush = true;
-                var androidSdkPath = Environment.GetEnvironmentVariable("ANDROID_HOME");
-                if (string.IsNullOrEmpty(androidSdkPath)) Console.WriteLine("Environment variable ANDROID_HOME not defined !");
-                else
-                {
-                    if (String.IsNullOrEmpty(aaptPath)) return "";
-                    var cmd = androidSdkPath + aaptPath + " dump badging \"" + localPackageFile + "\"";
-                    sw.WriteLine(cmd);
-                    sw.Close();
-                    response = sr.ReadToEnd();
-                    sr.Close();
-                }
+
+                if (String.IsNullOrEmpty(aaptPath)) return "";
+                var cmd = aaptPath + " dump badging \"" + localPackageFile + "\"";
+                sw.WriteLine(cmd);
+                sw.Close();
+                response = sr.ReadToEnd();
+                sr.Close();
+
                 p.Close();
 
                 if (!String.IsNullOrEmpty(response))

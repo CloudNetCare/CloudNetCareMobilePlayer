@@ -41,23 +41,40 @@ namespace CloudNetCare.MobilePlayer
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
 
             Configuration = builder.Build();
 
-            var scriptPath = Configuration.GetValue<string>("ScriptPath");
-            var packagePath = Configuration.GetValue<string>("PackagePath");
+            var dataDir = Configuration.GetValue<string>("DataDir");
 
-            var appiumServerIp = Configuration.GetValue<string>("AppiumServerIp");
-            var appiumPort = Configuration.GetValue<int>("AppiumPort");
-            var aaptPath = Configuration.GetValue<string>("AaptPath");
+            var scriptPath = Path.Combine(dataDir, Configuration.GetValue<string>("ScriptFile"));
+            var packagePath = Path.Combine(dataDir, Configuration.GetValue<string>("PackageFile"));
+
+            var buildToolsVersion = Configuration.GetValue<string>("ANDROID_BUILD_TOOLS_VERSION");
+            var aaptPath = Path.Combine(Configuration.GetValue<string>("ANDROID_HOME"), "build-tools", $"{buildToolsVersion}","aapt.exe");
+
+            CheckFileExists(scriptPath);
+            CheckFileExists(packagePath);
+            CheckFileExists(aaptPath);
+
+            var appiumServerHost = Configuration.GetValue<string>("AppiumHost");
+            var appiumPort = Configuration.GetValue<int>("AppiumPort", 4723);
 
             var deviceTarget = new DeviceTarget();
             Configuration.Bind("DeviceTarget", deviceTarget);
 
             var stepList = ScriptParser.GetStepListFromScript(scriptPath);
 
-            PlayOnDevice(stepList, deviceTarget, packagePath, appiumServerIp, appiumPort, aaptPath);
+            PlayOnDevice(stepList, deviceTarget, packagePath, appiumServerHost, appiumPort, aaptPath);
+        }
+
+        private static void CheckFileExists(string file)
+        {
+            if (!File.Exists(file))
+            {
+                throw new FileNotFoundException($"{file}");
+            }
         }
 
         private static void PlayOnDevice(IEnumerable<LocalStep> stepList, DeviceTarget deviceTarget, string packagePath, string appiumServerIp, int appiumPort, string aaptPath)
