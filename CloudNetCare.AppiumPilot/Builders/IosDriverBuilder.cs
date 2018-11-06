@@ -16,7 +16,6 @@ namespace CloudNetCare.AppiumPilot.Builders
     {
         private string _packagePath;
         private Uri _appiumServerUri;
-        private string _aaptExePath;
         private TimeSpan _commandTimeOut = TimeSpan.FromSeconds(300);
         private DeviceTarget _deviceTarget;
 
@@ -71,12 +70,6 @@ namespace CloudNetCare.AppiumPilot.Builders
         public IosDriverBuilder AppiumUri(Uri appiumUri)
         {
             _appiumServerUri = appiumUri;
-            return this;
-        }
-
-        public IosDriverBuilder AaptExePath(string aaptPath)
-        {
-            _aaptExePath = aaptPath;
             return this;
         }
 

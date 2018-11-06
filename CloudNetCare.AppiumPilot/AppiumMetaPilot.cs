@@ -84,8 +84,8 @@ namespace CloudNetCare.AppiumPilot
                                                 .Build();
 
                         _installedPackageName = androidDriverBuilder.InstalledPackageName;
-
                         AppiumDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
                         Thread.Sleep(10 * 1000);
                     }
                     catch (Exception e)
@@ -94,7 +94,7 @@ namespace CloudNetCare.AppiumPilot
                         return;
                     }
                 }
-                if (!deviceTarget.IsRealDevice && deviceTarget.Platform == DevicePlatform.IOs)
+                else if (!deviceTarget.IsRealDevice && deviceTarget.Platform == DevicePlatform.IOs)
                 {
                     try
                     {
@@ -102,12 +102,12 @@ namespace CloudNetCare.AppiumPilot
 
                         AppiumDriver = iosDriverBuilder
                                                 .DeviceTarget(deviceTarget)
-                                                .AaptExePath(aaptExePath)
                                                 .AppiumUri(appiumServerUri)
                                                 .CommandTimeout(CommandTimeout)
                                                 .PackagePath(packagePath)
                                                 .Build();
 
+                        AppiumDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
                         //ugly, wait for derbier warmup
 
@@ -187,7 +187,7 @@ namespace CloudNetCare.AppiumPilot
             {
                 if (_deviceTarget.Platform == DevicePlatform.IOs)
                 {
-                    if (IsBrowser(_aaptExePath)) AppiumDriver.Close();
+                    if (IsBrowser(_packagePath)) AppiumDriver.Close();
                     else AppInteraction.CloseApp();
                     AppiumDriver.Dispose();
                     AppiumDriver.Quit();

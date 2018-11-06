@@ -23,8 +23,9 @@ How to use the player :
 2 - Set appsettings.json for your context :
 <pre><code>
 {
-  "ScriptPath": "SeleniumScript.html",
-  "PackagePath": "test.apk",
+  "ScriptFile": "SeleniumScript.html",
+  "PackageFile": "test.apk",
+  "DataDir": "C:\\data",
 
   "DeviceTarget": {
     "Platform": "Android",
@@ -35,9 +36,9 @@ How to use the player :
     "VersionSubminor": ""
   },
 
-  "AppiumServerIp": "127.0.0.1",
+  "AppiumHost": "127.0.0.1",
   "AppiumPort": "4723",
-  "AaptPath": "\\build-tools\\26.0.2\\aapt.exe"
+  "ANDROID_BUILD_TOOLS_VERSION": "27.0.3"
 }
 </pre></code>
 

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  cloudnetcare.mobileplayer:
+    image: cloudnetcaremobileplayer
+    build:
+      context: .
+      dockerfile: CloudNetCareMobilePlayer/Dockerfile
