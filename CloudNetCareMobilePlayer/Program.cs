@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using CloudNetCare.AppiumPilot;
 using CloudNetCare.SeleniumWrapper;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace CloudNetCare.MobilePlayer
 {
@@ -66,7 +68,10 @@ namespace CloudNetCare.MobilePlayer
 
             var stepList = ScriptParser.GetStepListFromScript(scriptPath);
 
-            PlayOnDevice(stepList, deviceTarget, packagePath, appiumServerHost, appiumPort, aaptPath);
+            var report = PlayOnDevice(stepList, deviceTarget, packagePath, appiumServerHost, appiumPort, aaptPath);
+            var reportPath = Path.Combine(dataDir, Guid.NewGuid().ToString("N")+".json");
+            File.WriteAllText(reportPath, JsonConvert.SerializeObject(report, Formatting.Indented));
+            Console.Write($"Run report written to {reportPath}");
         }
 
         private static void CheckFileExists(string file)
@@ -77,38 +82,51 @@ namespace CloudNetCare.MobilePlayer
             }
         }
 
-        private static void PlayOnDevice(IEnumerable<LocalStep> stepList, DeviceTarget deviceTarget, string packagePath, string appiumServerIp, int appiumPort, string aaptPath)
+        private static IEnumerable<StepResult> PlayOnDevice(IEnumerable<LocalStep> stepList, DeviceTarget deviceTarget, string packagePath, string appiumServerIp, int appiumPort, string aaptPath)
         {
             using (var devicePilot = new DevicePilot())
             {
-                Dictionary<string, string> persistantVariables = new Dictionary<string, string>();
-
                 var isOk = devicePilot.StartDevice(deviceTarget, packagePath, appiumServerIp, appiumPort, aaptPath);
                 if (!isOk)
                 {
                     Console.WriteLine("Error opening device !");
-                    Console.ReadKey();
-                    return;
+                    return Enumerable.Empty<StepResult>();
                 }
 
+                var persistantVariables = new Dictionary<string, string>();
+                var report = new List<StepResult>();
+                int stepId = 0;
                 foreach (LocalStep step in stepList)
                 {
                     Console.WriteLine($"Play STEP: command:{step.Command} target:{step.Target} value:{step.Value}");
                     string stepValue;
                     var ret = devicePilot.ExecuteCommand(step.Command, step.Target, step.Value, step.Condition, step.TimedOutValue, ref persistantVariables, out stepValue);
+
+                    report.Add(new StepResult()
+                    {
+                        Command = step.Command,
+                        Target = step.Target,
+                        Value = stepValue,
+                        Message = ret.message,
+                        ResultValue = ret.resultValue.ToString(),
+                        StepId = stepId++
+                    });
+
                     if (!ret.isOk)
                     {
                         Console.WriteLine($"Error! Message: {ret.message} Result Value:{ret.resultValue}");
-                        devicePilot.Dispose();
-                        Console.ReadKey();
-                        return;
+                        return report;
                     }
-                    Console.WriteLine("OK! " + ret.message);
-                    Thread.Sleep(step.TimeBetweenSteps ?? 5 * 1000);
+                    else
+                    {
+                        Console.WriteLine("OK! " + ret.message);
+                        Thread.Sleep(step.TimeBetweenSteps ?? 5 * 1000);
+                    }
                 }
+
+                Console.WriteLine("Finished without any error !");
+                return report;
             }
-            Console.WriteLine("Finished without any error !");
-            Console.ReadKey();
         }
     }
 }
